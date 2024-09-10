@@ -21,9 +21,9 @@ type Metadata = {
 
 export const metadata: Metadata = {
   owner: {
-    name: 'Jii Yoo',
+    name: 'Rasel Shikdar',
     role: 'Frontend Developer',
-    email: 'jiiyoo@tuta.io',
+    email: 'info@rasel.us.kg',
   },
   work_exp: {
     0: {
@@ -161,13 +161,13 @@ export const metadata: Metadata = {
   contacts: {
     github: {
       name: 'GitHub',
-      handle: 'rolemadelen',
-      link: 'https://github.com/rolemadelen',
+      handle: 'raselshikdar',
+      link: 'https://github.com/raselshikdar',
     },
-    instagram: {
-      name: 'Instagram',
-      handle: 'madelendraws',
-      link: 'https://www.instagram.com/madelendraws',
+    website: {
+      name: 'Website',
+      handle: 'rasel.us.kg',
+      link: 'https://rasel.us.kg',
     },
   },
 }
