@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles['footer__copyright']}>
-        © 2024 <a href="https://rasel.us.kg">{name.toUpperCase()}</a><br />All rights are reserved.
+        © 2024 <a href="https://rasel.us.kg">Rasel Shikdar</a> | All rights reserved.
       </div>
     </footer>
   )
