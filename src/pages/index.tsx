@@ -24,25 +24,25 @@ const Blog: React.FC<Props> = ({ posts }) => {
   const title = 'Personal Blog'
   const ogImage = createOgImage({
     title,
-    meta: ['Jii Yoo', 'a web dev interested in productivity'].join('・'),
+    meta: ['Rasel Shikdar', 'a web dev interested in productivity'].join('・'),
   })
 
   return (
     <>
       <Head>
-        <title>Jii - Blog</title>
-        <meta content="Jii | Web Developer" name="description" />
+        <title>Rasel Shikdar - Blog</title>
+        <meta content="Rasel Shikdar | Web Developer" name="description" />
         <meta
           name="keyword"
           content="blog, javascript, frontend, developer, engineer"
         />
         <meta property="og:description" content="Jii | Web Developer" />
-        <meta property="og:url" content="https://blog.jiiyoo.me" />
+        <meta property="og:url" content="https://blog.rasel.us.kg" />
         <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="1600" />
         <meta property="og:image:height" content="836" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:title" content="Jii" />
+        <meta property="og:title" content="Rasel Shikdar" />
         <meta property="twitter:description" content={title} />
         <meta property="twitter:card" content="summary_large_image" />
 
