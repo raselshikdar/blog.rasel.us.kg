@@ -29,7 +29,7 @@ const Header = () => {
       <div className={styles.logo}>
         <Link href="/">
           <h1>
-            <span className={styles['logo__mark']}><b>>•</b></span>
+            <span className={styles['logo__mark']}><b>&gt;•</b></span>
             <span className={styles['logo__text']}><b>Rasel Shikdar</b></span>
           </h1>
           <h1></h1>
