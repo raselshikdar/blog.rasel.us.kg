@@ -146,9 +146,9 @@ const Posts: React.FC<Props> = ({ posts }) => {
     if (displayNonTech && post.type !== 'non-tech') return
 
     if (mode === 'detail') {
-      return NormalView(post)
-    } else {
       return DetailView(post)
+    } else {
+      return NormalView(post)
     }
   }
 
