@@ -24,19 +24,19 @@ const About = () => {
     <>
       <ProgressBar />
       <Head>
-        <title>Jii - About Me</title>
-        <meta content="Jii | Web Developer" name="description" />
+        <title>Rasel Shikdar - About Me</title>
+        <meta content="Rasel Shikdar | Web Developer" name="description" />
         <meta
           name="keyword"
           content="blog, javascript, frontend, developer, engineer"
         />
-        <meta property="og:description" content="Jii | Web Developer" />
-        <meta property="og:url" content="https://blog.jiiyoo.me" />
+        <meta property="og:description" content="Rasel Shikdar | Web Developer" />
+        <meta property="og:url" content="https://blog.rasel.us.kg" />
         <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="1600" />
         <meta property="og:image:height" content="836" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:title" content="Jii" />
+        <meta property="og:title" content="Rasel Shikdar" />
         <meta property="twitter:description" content={title} />
         <meta property="twitter:card" content="summary_large_image" />
 
@@ -57,7 +57,7 @@ const About = () => {
       <Header />
       <div className={styles.container}>
         <header className={styles.header}>
-          <a href="https://blog.jiiyoo.me/" rel="noopener noreferrer">
+          <a href="https://blog.rasel.us.kg/" rel="noopener noreferrer">
             <Image
               className={styles['header__logo']}
               src="/about-profile.png"
