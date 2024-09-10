@@ -22,7 +22,7 @@ const PostHeader: React.FC<Props> = ({ title, date, desc, tags }) => {
       <div className={styles.post__wrapper}>
         <span className={styles.post__date}>{formattedDate}</span>
         <Link href="/" title="Back to home">
-          <span className={styles.post__goback}>← back</span>
+          <span className={styles.post__goback}><b>← back</b></span>
         </Link>
       </div>
     </div>
