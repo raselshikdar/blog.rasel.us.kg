@@ -30,7 +30,7 @@ const Header = () => {
         <Link href="/">
           <h1>
             <span className={styles['logo__mark']}>&gt;$</span>
-            <span className={styles['logo__text']}><b>rasel's-blog</b></span>
+            <span className={styles['logo__text']}><b>Rasel Shikdar</b></span>
           </h1>
           <h1></h1>
         </Link>
