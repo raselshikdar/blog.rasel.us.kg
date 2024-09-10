@@ -29,7 +29,7 @@ const Review = () => {
         <meta property="og:image:width" content="1600" />
         <meta property="og:image:height" content="836" />
         <meta property="og:image:alt" content={title} />
-        <meta property="og:title" content="Jii" />
+        <meta property="og:title" content="Rasel Shikdar" />
         <meta property="og:description" content={title} />
         <meta property="twitter:description" content={title} />
         <meta property="twitter:card" content="summary_large_image" />
