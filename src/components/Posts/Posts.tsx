@@ -175,10 +175,10 @@ const Posts: React.FC<Props> = ({ posts }) => {
               type="checkbox"
               name="detailView"
               id="detailView"
-              checked={mode === 'detail'}
+              checked={mode === 'normal'}
               onChange={() => setMode(mode === 'detail' ? 'detail' : 'normal')}
             />
-            <label htmlFor="detailView">detail</label>
+            <label htmlFor="detailView">simplified</label>
           </div>
           <div className={styles.option}>
             <input
