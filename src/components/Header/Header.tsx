@@ -22,14 +22,14 @@ const Header = () => {
   return (
     <header className={styles.header} ref={headerRef}>
       <div className={styles.top} onClick={moveToTop}>
-        <span className={styles.earLeft}>૮</span>
-        <span className={styles.face}>• ᴥ •</span>
-        <span className={styles.earRight}>ა</span>
+        <span className={styles.earLeft}><b>૮</b></span>
+        <span className={styles.face}><b>• ᴥ •</b></span>
+        <span className={styles.earRight}><b>ა</b></span>
       </div>
       <div className={styles.logo}>
         <Link href="/">
           <h1>
-            <span className={styles['logo__mark']}>&gt;$</span>
+            <span className={styles['logo__mark']}><b>•</b></span>
             <span className={styles['logo__text']}><b>Rasel Shikdar</b></span>
           </h1>
           <h1></h1>
