@@ -1,23 +1,37 @@
-@import '../styles/func.scss';
+@import '../styles/func.scss'; // Correct import path
 
 .dark-mode {
-  --bg-color: $color-dark-bg; // Charcoal background color for dark mode
-  --text-color: $color-dark-text; // Dark mode text color
-  --link-color: $color-dark-link; // Dark mode link color
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: px2rem(16);
+  color: $color-black; // Default text color
 
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+  // Style for the dark mode icon
+  &__icon {
+    width: 1.5rem; // Size of the icon
+    height: 1.5rem;
+    margin-left: 8px;
+    transition: color 0.3s ease;
   }
 
-  a {
-    color: var(--link-color); // Use variable for link color in dark mode
+  &.active {
+    color: $color-dark-text; // Text color in dark mode
+  }
+
+  &.active .dark-mode__icon {
+    color: $color-dark-text; // Icon color in dark mode
+  }
+
+  // Additional hover styling
+  &:hover {
+    opacity: 0.8;
   }
 }
 
-.dark-mode__icon {
-  width: 1.5rem; // Size of the icon
-  height: 1.5rem;
-  margin-left: 8px;
-  transition: color 0.3s ease;
+// Dark mode body styling
+body.dark-mode {
+  background-color: $color-dark-bg; // Charcoal background color for dark mode
+  color: $color-dark-text; // Default text color in dark mode
 }
