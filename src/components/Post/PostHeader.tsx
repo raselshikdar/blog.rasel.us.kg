@@ -25,7 +25,7 @@ const PostHeader: React.FC<Props> = ({ title, date, desc, tags }) => {
             <span className={styles.post__goback}>
                 <b>
                     <span style={{ color: 'red' }}>&larr;</span> 
-                    <span style={{ color: 'green' }}> go back homepage</span>
+                    <span style={{ color: 'tomato' }}> go back homepage</span>
                 </b>
             </span>
         </Link>
