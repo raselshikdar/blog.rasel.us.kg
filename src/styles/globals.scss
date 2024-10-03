@@ -21,7 +21,7 @@
 }
 
 .dark-mode {
-  --bg-color: $color-dark-bg; // Dark mode background color
+  --bg-color: $color-dark-bg; // Charcoal background color for dark mode
   --text-color: $color-dark-text; // Dark mode text color
   --link-color: $color-dark-link; // Dark mode link color
 }
@@ -39,21 +39,10 @@ code {
   background: #009dff33;
 }
 
-progress[value] {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.post-content {
-  table,
-  thead,
-  tr,
-  td,
-  th {
-    margin: 2rem 0;
-    padding: 1rem;
-    border: 1px solid #eee;
-  }
+.progress {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid #eee;
 
   blockquote {
     margin: 2rem 0;
