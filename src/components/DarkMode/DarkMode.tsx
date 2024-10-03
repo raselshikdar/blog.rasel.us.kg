@@ -7,24 +7,23 @@ const DarkMode: React.FC = () => {
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
     document.body.classList.toggle('dark-mode', !isDarkMode);
+    localStorage.setItem('darkMode', (!isDarkMode).toString());
   };
 
   useEffect(() => {
-    const currentMode = localStorage.getItem('darkMode') === 'true';
-    setIsDarkMode(currentMode);
-    document.body.classList.toggle('dark-mode', currentMode);
+    const storedDarkMode = localStorage.getItem('darkMode');
+    if (storedDarkMode === 'true') {
+      setIsDarkMode(true);
+      document.body.classList.add('dark-mode');
+    }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('darkMode', String(isDarkMode));
-  }, [isDarkMode]);
 
   return (
     <div className={`${styles['dark-mode']} ${isDarkMode ? styles.active : ''}`} onClick={toggleDarkMode}>
       <span className={styles['dark-mode__icon']}>
-        {isDarkMode ? '🌙' : '☀️'} {/* Replace with your icon components or SVG */}
+        {isDarkMode ? '🌙' : '☀️'} {/* Sun for light mode, moon for dark mode */}
       </span>
-      <span>{isDarkMode ? '' : ''}</span>
+      <span>{isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</span>
     </div>
   );
 };
