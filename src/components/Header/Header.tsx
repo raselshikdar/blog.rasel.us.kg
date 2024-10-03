@@ -45,9 +45,6 @@ const Header = () => {
             <Link href="/about">about</Link>
           </li>
           <li>
-            <Link href="/now">now</Link>
-          </li>
-          <li>
             <Link href="https://rasel.us.kg" target="__blank" rel="noopener noreferrer">me</Link>
           </li>
         </ul>
