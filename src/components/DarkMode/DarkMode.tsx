@@ -24,7 +24,7 @@ const DarkMode: React.FC = () => {
       <span className={styles['dark-mode__icon']}>
         {isDarkMode ? '🌙' : '☀️'} {/* Replace with your icon components or SVG */}
       </span>
-      <span>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
+      <span>{isDarkMode ? '' : ''}</span>
     </div>
   );
 };
