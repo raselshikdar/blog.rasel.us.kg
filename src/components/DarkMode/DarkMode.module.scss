@@ -1,0 +1,28 @@
+// DarkMode.module.scss
+
+:root {
+  --bg-color: #ffffff; // Light mode background color
+  --text-color: #000000; // Light mode text color
+}
+
+.dark-mode {
+  --bg-color: #121212; // Dark mode background color
+  --text-color: #ffffff; // Dark mode text color
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
