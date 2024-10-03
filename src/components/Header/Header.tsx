@@ -8,7 +8,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (scrollY > 80) {
+      if (window.scrollY > 80) {
         headerRef.current?.classList.add(`${styles.scroll}`);
       } else {
         headerRef.current?.classList.remove(`${styles.scroll}`);
