@@ -1,3 +1,6 @@
+// func.scss
+
+// Light Mode Colors
 $color-text: #555;
 $color-link: #2d8ac3;
 $color-blue: $color-link;
@@ -6,20 +9,34 @@ $color-gray: #666;
 $color-lightgray: #999;
 $color-black: #111;
 
-// Dark mode colors
-$color-dark-bg: #2c2c2c; // Charcoal background for dark mode
-$color-dark-text: #ffffff; // Dark mode text color
-$color-dark-link: #4dabff; // Dark mode link color
+// Dark Mode Colors (Charcoal theme)
+$color-dark-bg: #333333; // Charcoal background for dark mode
+$color-dark-text: #ffffff; // White text color for dark mode
+$color-dark-link: #4dabff; // Light blue link color for dark mode
 
+// Other Variables
 $max-width: 40rem;
 $top-margin: 80px;
 
+// Functions
 @function px2rem($px) {
   @return #{$px / 15}rem;
 }
 
+// Mixins
 @mixin link-decoration {
   text-decoration: underline dashed;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
+}
+
+// Example Usage of Dark and Light Mode Colors in SCSS
+.light-mode {
+  background-color: $color-text; // Example light mode color use
+  color: $color-black;
+}
+
+.dark-mode {
+  background-color: $color-dark-bg; // Dark mode background color
+  color: $color-dark-text; // Dark mode text color
 }
