@@ -1,32 +1,37 @@
 // DarkMode.tsx
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './DarkMode.module.scss';
 
 const DarkMode: React.FC = () => {
-  const toggleDarkMode = () => {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-    // Save user preference to localStorage
-    const isDarkMode = body.classList.contains('dark-mode');
-    localStorage.setItem('dark-mode', JSON.stringify(isDarkMode));
-  };
-
-  // Load user preference on initial load
   useEffect(() => {
-    const isDarkMode = JSON.parse(localStorage.getItem('dark-mode') || 'false');
+    const body = document.body;
     if (isDarkMode) {
-      document.body.classList.add('dark-mode');
+      body.classList.add('dark-mode');
+    } else {
+      body.classList.remove('dark-mode');
+    }
+    // Save preference to localStorage
+    localStorage.setItem('dark-mode', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
+  // Load preference from localStorage on mount
+  useEffect(() => {
+    const storedPreference = localStorage.getItem('dark-mode');
+    if (storedPreference) {
+      setIsDarkMode(JSON.parse(storedPreference));
     }
   }, []);
 
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
   return (
-    <button
-      className={styles.toggleButton}
-      onClick={toggleDarkMode}
-    >
-      Toggle Dark Mode
+    <button className={styles['dark-mode-button']} onClick={toggleDarkMode} aria-label="Toggle Dark Mode">
+      {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     </button>
   );
 };
