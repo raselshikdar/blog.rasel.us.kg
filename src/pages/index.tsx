@@ -1,9 +1,7 @@
-import React from 'react'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import ProgressBar from '@/components/ProgressBar/ProgressBar'
 import Posts from '@/components/Posts/Posts'
-import DarkModeToggle from '@/components/DarkModeToggle/DarkModeToggle' // Assuming this is the correct path
 import { getAllPosts } from '@/lib/blog'
 import Head from 'next/head'
 import { createOgImage } from '@/lib/createOgImage'
@@ -15,7 +13,7 @@ interface Post {
   date: string
   note: string
   type: string
-  tags?: string[] // Update the tags type to string[]
+  tags?: [string]
 }
 
 interface Props {
@@ -47,6 +45,7 @@ const Blog: React.FC<Props> = ({ posts }) => {
         <meta property="og:title" content="Rasel Shikdar" />
         <meta property="twitter:description" content={title} />
         <meta property="twitter:card" content="summary_large_image" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
           rel="icon"
@@ -62,7 +61,6 @@ const Blog: React.FC<Props> = ({ posts }) => {
         />
       </Head>
       <Header />
-      <DarkModeToggle /> {/* Add Dark Mode Toggle here */}
       <ProgressBar />
       <Posts posts={posts} />
       <Footer />
@@ -71,7 +69,7 @@ const Blog: React.FC<Props> = ({ posts }) => {
 }
 
 export async function getStaticProps() {
-  const posts = getAllPosts()
+  let posts = getAllPosts()
 
   return {
     props: {
