@@ -1,21 +1,35 @@
-// DarkMode.module.scss
-
-@import '../../styles/func.scss'; // Correct import path
+@import '/src/styles/func.scss';
 
 .dark-mode {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 10px; // Add padding to the container
+  font-size: px2rem(16); // Using the mixin from func.scss
+  color: $color-black; // Default light mode text color
+  transition: color 0.3s ease;
 
   &__icon {
-    width: 24px; // Adjust icon size
-    height: 24px;
-    margin-right: 8px; // Space between icon and text
-    transition: color 0.3s; // Smooth transition for icon color
+    margin-left: 8px;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: color 0.3s ease;
   }
 
   &.active {
-    color: var(--link-color); // Change the color when dark mode is active
+    color: $color-dark-text; // Dark mode text color (white)
   }
+
+  &.active .dark-mode__icon {
+    color: $color-dark-text; // Icon color in dark mode (white)
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Global dark mode styling for the body element
+body.dark-mode {
+  background-color: $color-dark-bg; // Charcoal background for dark mode
+  color: $color-dark-text; // White text in dark mode
 }
