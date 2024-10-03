@@ -1,28 +1,33 @@
 // DarkMode.module.scss
 
-:root {
-  --bg-color: #ffffff; // Light mode background color
-  --text-color: #000000; // Light mode text color
-}
+@import '/src/styles/func.scss';
 
 .dark-mode {
-  --bg-color: #121212; // Dark mode background color
-  --text-color: #ffffff; // Dark mode text color
+  background-color: #121212; // Dark mode background color
+  color: #ffffff; // Dark mode text color
+
+  a {
+    color: #4dabff; // Dark mode link color
+  }
+
+  blockquote {
+    border-left-color: #444; // Change blockquote border color for dark mode
+  }
+
+  // Additional styles can be added as needed
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-button {
+.dark-mode-button {
+  font-size: px2rem(16);
+  padding: px2rem(10) px2rem(15);
   background-color: transparent;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
+  border: 1px solid $color-gray;
+  color: $color-gray;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: $color-gray;
+    color: $color-black;
   }
 }
