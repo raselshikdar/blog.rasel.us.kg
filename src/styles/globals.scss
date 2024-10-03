@@ -5,14 +5,23 @@
 @import './func.scss';
 
 :root {
+  --color-bg: white;  // Light background color
+  --color-text: #555; // Light text color
+  --color-border: #eee; // Light border color
+  --color-light-gray: #f0f0f0; // Light gray background for code
+  --color-dark-bg: black; // Dark background color
+  --color-dark-text: white; // Dark text color
+  --color-dark-border: #333; // Dark border color
+  --color-accent: #009dff33; // Accent color
+  --color-dark-accent: #009dff; // Dark mode accent color
+  
   max-width: 1920px;
   margin: 0 auto;
 
-  color: #555;
+  color: var(--color-text);
+  background-color: var(--color-bg);
   font-family: 'Pretendard', 'Pretendard JP', Times, sans-serif;
   font-size: 15px;
-  // text-transform: lowercase;
-
   scroll-behavior: smooth;
 }
 
@@ -21,7 +30,7 @@ code {
 }
 
 ::selection {
-  background: #009dff33;
+  background: var(--color-accent);
 }
 
 progress[value] {
@@ -37,14 +46,14 @@ progress[value] {
   th {
     margin: 2rem 0;
     padding: 1rem;
-    border: 1px solid #eee;
+    border: 1px solid var(--color-border);
   }
 
   blockquote {
     margin: 2rem 0;
     padding: 0 2rem;
     color: #999;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid var(--color-border);
 
     p {
       margin: 0;
@@ -77,7 +86,7 @@ progress[value] {
 
   p > code,
   li > code {
-    background-color: #f0f0f0;
+    background-color: var(--color-light-gray);
   }
 
   p {
@@ -89,7 +98,7 @@ progress[value] {
 
   img {
     max-width: 80%;
-    border: 1px solid #eee;
+    border: 1px solid var(--color-border);
 
     & ~ em {
       display: block;
@@ -178,7 +187,7 @@ h6 {
 .footnotes {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-border);
 
   font-size: 0.8rem;
 
@@ -208,4 +217,29 @@ h6 {
 
 sup > a {
   color: $color-red !important;
+}
+
+// Dark mode styles
+.dark-mode {
+  --color-bg: var(--color-dark-bg);
+  --color-text: var(--color-dark-text);
+  --color-border: var(--color-dark-border);
+  --color-accent: var(--color-dark-accent);
+  
+  // Adjust other styles as needed for dark mode
+  .post-content {
+    blockquote {
+      border-left: 1px solid var(--color-border);
+      color: #ccc; // Change blockquote text color
+    }
+
+    a {
+      color: #ddd; // Change link color in dark mode
+    }
+  }
+
+  body {
+    color: var(--color-dark-text);
+    background-color: var(--color-dark-bg);
+  }
 }
