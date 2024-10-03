@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import useState
+import React from 'react';
 import Head from 'next/head';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 
@@ -6,14 +6,12 @@ import Footer from '@/components/Footer/Footer';
 import PostContent from '@/components/Post/PostContent';
 import PostHeader from '@/components/Post/PostHeader';
 import ProgressBar from '@/components/ProgressBar/ProgressBar';
+import DarkMode from '@/components/DarkMode'; // Import DarkMode component
 import styles from '@/components/Post/Post.module.scss';
 
 import Comment from '@/lib/giscus';
 import { createOgImage } from '@/lib/createOgImage';
 import { getAllPostIds, getAllPosts, getPostData } from '@/lib/blog';
-
-// Import DareMode components here
-import DareMode from '@/components/DareMode'; // Adjust the import path accordingly
 
 interface Props {
   post: {
@@ -23,7 +21,7 @@ interface Props {
     markdown: string;
     type: string;
     note: string;
-    tags?: [string];
+    tags?: string[]; // Use string[] for better type safety
   };
   prevPost?: string | undefined;
   nextPost?: string | undefined;
@@ -47,9 +45,6 @@ const Post: React.FC<Props> = ({
     ].join('・'),
   });
 
-  // State to manage DareMode
-  const [dareMode, setDareMode] = useState(false);
-
   return (
     <>
       <Head>
@@ -67,29 +62,18 @@ const Post: React.FC<Props> = ({
 
       <div className={styles.post}>
         <PostHeader title={title} date={date} desc={desc} tags={tags} />
-        
-        {/* DareMode Button to toggle mode */}
-        <button
-          onClick={() => setDareMode(!dareMode)}
-          className={styles.dareModeButton}
-        >
-          {dareMode ? 'Exit DareMode' : 'Enter DareMode'}
-        </button>
-
-        {/* Render DareMode if enabled */}
-        {dareMode && <DareMode />}
-
         <PostContent
           markdown={markdown}
           prevPost={prevPost}
           nextPost={nextPost}
         />
+        <DarkMode /> {/* Include DarkMode component */}
         <Comment />
         <Footer />
       </div>
     </>
   );
-}
+};
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -113,10 +97,10 @@ export const getStaticProps: GetStaticProps = async ({
     };
   }
 
-  let allPosts = getAllPosts().map((post: Frontmatter) => post.slug);
+  const allPosts = getAllPosts().map((post: Frontmatter) => post.slug);
   const index = params.id && allPosts.indexOf(params.id[0]);
-  let prevIndex = index > 0 ? index - 1 : null;
-  let nextIndex = index < allPosts.length - 1 ? index + 1 : null;
+  const prevIndex = index > 0 ? index - 1 : null;
+  const nextIndex = index < allPosts.length - 1 ? index + 1 : null;
 
   const nextPost = prevIndex !== null ? allPosts[prevIndex] : null;
   const prevPost = nextIndex !== null ? allPosts[nextIndex] : null;
@@ -129,6 +113,6 @@ export const getStaticProps: GetStaticProps = async ({
       nextPost,
     },
   };
-}
+};
 
 export default Post;
