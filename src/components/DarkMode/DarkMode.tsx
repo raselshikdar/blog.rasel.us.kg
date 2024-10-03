@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa'; // Using react-icons for sun and moon icons
+import { FaSun, FaMoon } from 'react-icons/fa';
 import styles from './DarkMode.module.scss';
 
 const DarkMode: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false); // Ensure component is mounted for client-side
 
+  // This function handles the toggle between dark and light mode
   const toggleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
-    document.body.classList.toggle('dark-mode', !isDarkMode);
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    if (typeof window !== 'undefined') {
+      document.body.classList.toggle('dark-mode', newMode);
+      localStorage.setItem('darkMode', String(newMode));
+    }
   };
 
   useEffect(() => {
-    const currentMode = localStorage.getItem('darkMode') === 'true';
-    setIsDarkMode(currentMode);
-    document.body.classList.toggle('dark-mode', currentMode);
+    // Component is mounted
+    setIsMounted(true);
+
+    // Get dark mode preference from localStorage after mounting
+    const savedMode = localStorage.getItem('darkMode') === 'true';
+    setIsDarkMode(savedMode);
+    if (savedMode && typeof window !== 'undefined') {
+      document.body.classList.add('dark-mode');
+    }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('darkMode', String(isDarkMode));
-  }, [isDarkMode]);
+  // Render null on server to avoid SSR mismatch (ensuring the app renders only after mounting)
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className={`${styles['dark-mode']} ${isDarkMode ? styles.active : ''}`} onClick={toggleDarkMode}>
       <span className={styles['dark-mode__icon']}>
-        {isDarkMode ? <FaMoon /> : <FaSun />} {/* Sun and moon icons */}
+        {isDarkMode ? <FaMoon /> : <FaSun />}
       </span>
     </div>
   );
