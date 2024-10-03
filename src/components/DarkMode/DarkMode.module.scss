@@ -1,40 +1,23 @@
-@import '/src/styles/func.scss';
+@import '../styles/func.scss';
 
 .dark-mode {
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  --bg-color: $color-dark-bg; // Charcoal background color for dark mode
+  --text-color: $color-dark-text; // Dark mode text color
+  --link-color: $color-dark-link; // Dark mode link color
 
-  font-size: px2rem(16);
-  color: $color-black; // Default color
-
-  // Style for the dark mode icon (adjust colors based on your theme)
-  &__icon {
-    width: 1.5rem; // Adjust the size of the icon as needed
-    height: 1.5rem;
-    margin-left: 8px;
-
-    // Example for sun/moon icon based on dark mode
-    transition: color 0.3s ease;
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
   }
 
-  &.active {
-    color: #f5f5f5; // Text color in dark mode
-  }
-
-  &.active .dark-mode__icon {
-    color: #f5f5f5; // Icon color in dark mode
-  }
-
-  // Add any other styling as needed for hover states, etc.
-  &:hover {
-    opacity: 0.8;
+  a {
+    color: var(--link-color); // Use variable for link color in dark mode
   }
 }
 
-// If you want to add transitions for the body or global styles when dark mode is active
-body.dark-mode {
-  background-color: #111; // Background color for dark mode
-  color: #f5f5f5; // Default text color in dark mode
+.dark-mode__icon {
+  width: 1.5rem; // Size of the icon
+  height: 1.5rem;
+  margin-left: 8px;
+  transition: color 0.3s ease;
 }
