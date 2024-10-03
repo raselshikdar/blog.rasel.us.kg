@@ -5,24 +5,30 @@
 @import './func.scss';
 
 :root {
-  --color-bg: white;  // Light background color
-  --color-text: #555; // Light text color
-  --color-border: #eee; // Light border color
-  --color-light-gray: #f0f0f0; // Light gray background for code
-  --color-dark-bg: black; // Dark background color
-  --color-dark-text: white; // Dark text color
-  --color-dark-border: #333; // Dark border color
-  --color-accent: #009dff33; // Accent color
-  --color-dark-accent: #009dff; // Dark mode accent color
-  
   max-width: 1920px;
   margin: 0 auto;
 
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: $color-text; // Use variable for text color
   font-family: 'Pretendard', 'Pretendard JP', Times, sans-serif;
   font-size: 15px;
+
   scroll-behavior: smooth;
+
+  // Light mode colors
+  --bg-color: #ffffff; // Light mode background color
+  --text-color: $color-text; // Light mode text color
+  --link-color: $color-link; // Light mode link color
+}
+
+.dark-mode {
+  --bg-color: $color-dark-bg; // Dark mode background color
+  --text-color: $color-dark-text; // Dark mode text color
+  --link-color: $color-dark-link; // Dark mode link color
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 code {
@@ -30,7 +36,7 @@ code {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: #009dff33;
 }
 
 progress[value] {
@@ -46,14 +52,14 @@ progress[value] {
   th {
     margin: 2rem 0;
     padding: 1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid #eee;
   }
 
   blockquote {
     margin: 2rem 0;
     padding: 0 2rem;
-    color: #999;
-    border-left: 1px solid var(--color-border);
+    color: var(--text-color); // Use variable for text color
+    border-left: 1px solid #ccc;
 
     p {
       margin: 0;
@@ -67,7 +73,7 @@ progress[value] {
     }
 
     a {
-      color: #888;
+      color: var(--link-color); // Use variable for link color
     }
   }
 
@@ -82,11 +88,12 @@ progress[value] {
     text-decoration-thickness: 0.35rem;
     text-underline-offset: -0.2rem;
     transition: text-decoration 0.3s;
+    color: var(--link-color); // Use variable for link color
   }
 
   p > code,
   li > code {
-    background-color: var(--color-light-gray);
+    background-color: #f0f0f0;
   }
 
   p {
@@ -98,7 +105,7 @@ progress[value] {
 
   img {
     max-width: 80%;
-    border: 1px solid var(--color-border);
+    border: 1px solid #eee;
 
     & ~ em {
       display: block;
@@ -187,7 +194,7 @@ h6 {
 .footnotes {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid #eee;
 
   font-size: 0.8rem;
 
@@ -217,29 +224,4 @@ h6 {
 
 sup > a {
   color: $color-red !important;
-}
-
-// Dark mode styles
-.dark-mode {
-  --color-bg: var(--color-dark-bg);
-  --color-text: var(--color-dark-text);
-  --color-border: var(--color-dark-border);
-  --color-accent: var(--color-dark-accent);
-  
-  // Adjust other styles as needed for dark mode
-  .post-content {
-    blockquote {
-      border-left: 1px solid var(--color-border);
-      color: #ccc; // Change blockquote text color
-    }
-
-    a {
-      color: #ddd; // Change link color in dark mode
-    }
-  }
-
-  body {
-    color: var(--color-dark-text);
-    background-color: var(--color-dark-bg);
-  }
 }
