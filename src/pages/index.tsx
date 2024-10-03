@@ -1,38 +1,33 @@
-import React, { useState } from 'react'; // Import useState
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import ProgressBar from '@/components/ProgressBar/ProgressBar';
-import Posts from '@/components/Posts/Posts';
-import { getAllPosts } from '@/lib/blog';
-import Head from 'next/head';
-import { createOgImage } from '@/lib/createOgImage';
-
-// Import DareMode components here
-import DareMode from '@/components/DareMode'; // Adjust the import path accordingly
+import React from 'react'
+import Header from '@/components/Header/Header'
+import Footer from '@/components/Footer/Footer'
+import ProgressBar from '@/components/ProgressBar/ProgressBar'
+import Posts from '@/components/Posts/Posts'
+import DarkModeToggle from '@/components/DarkModeToggle/DarkModeToggle' // Assuming this is the correct path
+import { getAllPosts } from '@/lib/blog'
+import Head from 'next/head'
+import { createOgImage } from '@/lib/createOgImage'
 
 interface Post {
-  slug: string;
-  title: string;
-  desc: string;
-  date: string;
-  note: string;
-  type: string;
-  tags?: [string];
+  slug: string
+  title: string
+  desc: string
+  date: string
+  note: string
+  type: string
+  tags?: string[] // Update the tags type to string[]
 }
 
 interface Props {
-  posts: Post[];
+  posts: Post[]
 }
 
 const Blog: React.FC<Props> = ({ posts }) => {
-  const title = 'Personal Blog';
+  const title = 'Personal Blog'
   const ogImage = createOgImage({
     title,
     meta: ['Rasel Shikdar', 'a web dev interested in productivity'].join('・'),
-  });
-
-  // State to manage DareMode
-  const [dareMode, setDareMode] = useState(false);
+  })
 
   return (
     <>
@@ -52,7 +47,6 @@ const Blog: React.FC<Props> = ({ posts }) => {
         <meta property="og:title" content="Rasel Shikdar" />
         <meta property="twitter:description" content={title} />
         <meta property="twitter:card" content="summary_large_image" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
           rel="icon"
@@ -68,33 +62,22 @@ const Blog: React.FC<Props> = ({ posts }) => {
         />
       </Head>
       <Header />
+      <DarkModeToggle /> {/* Add Dark Mode Toggle here */}
       <ProgressBar />
-
-      {/* DareMode Button to toggle mode */}
-      <button
-        onClick={() => setDareMode(!dareMode)}
-        className="dareModeButton" // Adjust the class as needed for styling
-      >
-        {dareMode ? 'Exit DareMode' : 'Enter DareMode'}
-      </button>
-
-      {/* Render DareMode if enabled */}
-      {dareMode && <DareMode />}
-
       <Posts posts={posts} />
       <Footer />
     </>
-  );
+  )
 }
 
 export async function getStaticProps() {
-  let posts = getAllPosts();
+  const posts = getAllPosts()
 
   return {
     props: {
       posts,
     },
-  };
+  }
 }
 
-export default Blog;
+export default Blog
