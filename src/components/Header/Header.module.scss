@@ -15,7 +15,8 @@
   max-width: $max-width;
   padding: px2rem(40) px2rem(16);
 
-  color: $color-black;
+  // Updated color to a stylish purple shade
+  color: #6a0dad; // Stylish purple shade
 
   backdrop-filter: blur(5px) grayscale(1);
   mask-image: linear-gradient(180deg, #fff, #fff, transparent);
