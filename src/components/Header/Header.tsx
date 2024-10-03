@@ -22,9 +22,9 @@ const Header = () => {
   return (
     <header className={styles.header} ref={headerRef}>
       <div className={styles.top} onClick={moveToTop}>
-        <span className={styles.earLeft}><b>૮</b></span>
-        <span className={styles.face}><b>• ᴥ •</b></span>
-        <span className={styles.earRight}><b>ა</b></span>
+        <span className={styles.earLeft}><b>&#2708;</b></span>
+        <span className={styles.face}><b>&bull; &#x2025; &bull;</b></span>
+        <span className={styles.earRight}><b>&#4304;</b></span>
       </div>
       <div className={styles.logo}>
         <Link href="/">
