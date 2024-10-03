@@ -1,35 +1,54 @@
-import React, { useEffect, useRef } from 'react'
-import Preview from '@/lib/codeblock'
-import styles from './Post.module.scss'
-import Link from 'next/link'
+import React, { useEffect, useRef } from 'react';
+import Preview from '@/lib/codeblock';
+import styles from './Post.module.scss';
+import Link from 'next/link';
 
 interface Props {
-  markdown: string
-  prevPost: string | undefined
-  nextPost: string | undefined
+  markdown: string;
+  prevPost?: string; // Use optional chaining
+  nextPost?: string; // Use optional chaining
 }
 
 const PostContent: React.FC<Props> = ({ markdown, prevPost, nextPost }) => {
-  const topRef = useRef<HTMLDivElement>(null)
+  const topRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    const handleScroll = () => {
+      const { scrollY } = window; // Destructure scrollY
       if (scrollY > 200) {
-        topRef.current?.classList.add(`${styles.visible}`)
+        topRef.current?.classList.add(styles.visible);
       } else {
-        topRef.current?.classList.remove(`${styles.visible}`)
+        topRef.current?.classList.remove(styles.visible);
       }
-    })
-  }, [])
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const moveToTop = () => {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
-  }
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scrolling to top
+  };
 
   return (
     <div className={`${styles['post__content']} post-content`}>
-      <div className={styles.top} onClick={moveToTop} ref={topRef}>
+      <div 
+        className={styles.top} 
+        onClick={moveToTop} 
+        ref={topRef} 
+        role="button" // Adding role for accessibility
+        tabIndex={0} // Make it focusable
+        onKeyDown={(e) => { // Allow keyboard interaction
+          if (e.key === 'Enter' || e.key === ' ') {
+            moveToTop();
+          }
+        }}
+        aria-label="Scroll to top" // Accessibility label
+      >
         <span>• ᴥ •</span>
         <span>つ TOP </span>
       </div>
@@ -47,7 +66,7 @@ const PostContent: React.FC<Props> = ({ markdown, prevPost, nextPost }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostContent
+export default PostContent;
