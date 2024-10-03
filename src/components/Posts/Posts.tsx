@@ -4,12 +4,10 @@ import { useRouter } from 'next/router'
 import { atom, useAtom } from 'jotai'
 import styles from './Posts.module.scss'
 
-// State atoms for managing view modes and filters
 export const modeAtom = atom('normal')
 export const techAtom = atom(true)
 export const nonTechAtom = atom(false)
 
-// Type definitions for posts
 type View = {
   slug: string
   title: string
@@ -17,7 +15,7 @@ type View = {
   date: string
   note: string
   type: string
-  tags?: string[] // Changed to string[] for better flexibility
+  tags?: [string]
 }
 
 type Props = {
@@ -32,52 +30,71 @@ const Posts: React.FC<Props> = ({ posts }) => {
   const year = useRef('')
   const month = useRef<null | string>(null)
 
-  // Function to display year if it's different from the last displayed year
   const displayYear = (postYear: string) => {
     if (year.current === postYear) {
-      return null // No need to display the year again
+      return ''
     } else {
       year.current = postYear
-      return <div className={styles['date__year']} key={postYear}>{postYear}</div>
+
+      return (
+        <>
+          <div className={styles['date__year']} key={postYear}>
+            {postYear}
+          </div>
+        </>
+      )
     }
   }
 
-  // Function to check if a new month is being displayed
   const isNewMonth = (m: number) => {
     const months = [
-      '', 'January', 'February', 'March', 'April', 'May', 'June', 
-      'July', 'August', 'September', 'October', 'November', 'December'
+      '',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ]
 
-    const isNew = months[m] !== month.current
-    if (isNew) {
+    let ret = false
+    if (months[m] != month.current) {
       month.current = months[m]
+      ret = true
     }
 
-    return isNew
+    return ret
   }
 
-  // Function to append the correct suffix to a day
   const appendSuffix = (day: number) => {
     if (day >= 11 && day <= 13) return day + 'th'
     switch (day % 10) {
-      case 1: return day + 'st'
-      case 2: return day + 'nd'
-      case 3: return day + 'rd'
-      default: return day + 'th'
+      case 1:
+        return day + 'st'
+      case 2:
+        return day + 'nd'
+      case 3:
+        return day + 'rd'
+      default:
+        return day + 'th'
     }
   }
 
-  // Function to format date into year, month, and day
   const formatDate = (date: string) => {
     const [year, month, day] = date.split('-')
+
     const fyear = displayYear(year)
     const fday = appendSuffix(+day)
 
     return { fyear, fmonth: month, fday }
   }
 
-  // Component for Normal View
   const NormalView = ({ slug, title, date }: View) => {
     date = date.split(' ')[0]
     const { fyear, fmonth, fday } = formatDate(date)
@@ -85,7 +102,10 @@ const Posts: React.FC<Props> = ({ posts }) => {
     return (
       <div>
         {fyear}
-        {isNewMonth(+fmonth) && <div className={styles['date__month']}>{month.current}</div>}
+
+        {isNewMonth(+fmonth) && (
+          <div className={styles['date__month']}> {month.current} </div>
+        )}
         <Link key={`blog-${slug}`} href={`/post/${slug}`} passHref>
           <div className={styles.post}>
             <div className={styles['post__title']}>{title}</div>
@@ -96,22 +116,24 @@ const Posts: React.FC<Props> = ({ posts }) => {
     )
   }
 
-  // Component for Detail View
-  const DetailView = ({ slug, title, desc, date, tags }: View) => {
-    const formattedDate = date.split(' ')[0]
+  const DetailView = ({ slug, title, desc, date, note, tags }: View) => {
+    date = date.split(' ')[0]
 
     return (
       <div className={styles.simple}>
         <Link key={`blog-${slug}`} href={`/post/${slug}`} passHref>
           <div className={styles.simple__post}>
             <div className={styles.simple__title}>{title}</div>
-            <div className={styles.simple__date}>{formattedDate}・{desc}</div>
+            <div className={styles.simple__date}>
+              {date}・{desc}
+            </div>
             <div className={styles.tags}>
-              {tags?.map(tag => (
-                <span className={styles.tag} key={tag}>
-                  {tag}
-                </span>
-              ))}
+              {tags &&
+                tags.map((tag) => (
+                  <span className={styles.tag} key={tag}>
+                    {tag}
+                  </span>
+                ))}
             </div>
           </div>
         </Link>
@@ -119,17 +141,22 @@ const Posts: React.FC<Props> = ({ posts }) => {
     )
   }
 
-  // Factory function to determine which view to render
   const viewFactory = (post: View) => {
-    if ((displayTech && post.type !== 'tech') || (displayNonTech && post.type !== 'non-tech')) return null
+    if (displayTech && post.type !== 'tech') return
+    if (displayNonTech && post.type !== 'non-tech') return
 
-    return mode === 'normal' ? DetailView(post) : NormalView(post)
+    if (mode === 'normal') {
+      return DetailView(post)
+    } else {
+      return NormalView(post)
+    }
   }
 
-  // Function to open a random post
   const openRandomPost = () => {
-    const randomIndex = Math.floor(Math.random() * posts.length)
-    const { slug } = posts[randomIndex]
+    const SIZE = posts.length
+    const randomNote = Math.floor(Math.random() * SIZE)
+    let { slug } = posts[randomNote]
+
     router.push(`/post/${slug}`)
   }
 
@@ -138,7 +165,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
       <div className={styles.options}>
         <div>
           <button type="button" onClick={openRandomPost}>
-            Random 🪄
+            random🪄
             <span className={styles.accio__note}>📃</span>
           </button>
         </div>
@@ -151,7 +178,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
               checked={mode === 'detail'}
               onChange={() => setMode(mode === 'normal' ? 'detail' : 'normal')}
             />
-            <label htmlFor="detailView">Simple</label>
+            <label htmlFor="detailView">simple</label>
           </div>
           <div className={styles.option}>
             <input
@@ -160,11 +187,11 @@ const Posts: React.FC<Props> = ({ posts }) => {
               id="tech"
               checked={displayTech}
               onChange={() => {
-                setDisplayNonTech(!displayTech)
-                setDisplayTech(prev => !prev)
+                setDisplayNonTech(displayTech ? false : displayTech)
+                setDisplayTech(!displayTech)
               }}
             />
-            <label htmlFor="tech">Tech</label>
+            <label htmlFor="tech">tech</label>
           </div>
           <div className={styles.option}>
             <input
@@ -173,18 +200,18 @@ const Posts: React.FC<Props> = ({ posts }) => {
               id="nontech"
               checked={displayNonTech}
               onChange={() => {
-                setDisplayTech(!displayNonTech)
-                setDisplayNonTech(prev => !prev)
+                setDisplayTech(displayNonTech ? false : displayNonTech)
+                setDisplayNonTech(!displayNonTech)
               }}
             />
-            <label htmlFor="nontech">Non-Tech</label>
+            <label htmlFor="nontech">non-tech</label>
           </div>
         </div>
       </div>
 
-      {posts.map((data) => (
-        <React.Fragment key={data.slug}>{viewFactory(data)}</React.Fragment>
-      ))}
+      {posts.map((data, i) => {
+        return <React.Fragment key={i}>{viewFactory(data)}</React.Fragment>
+      })}
     </main>
   )
 }
