@@ -1,24 +1,29 @@
-import React, { useEffect, useRef } from 'react'
-import Link from 'next/link'
-import styles from './Header.module.scss'
+import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import styles from './Header.module.scss';
+import DarkMode from '../DarkMode/DarkMode'; // Adjust the path as necessary
 
 const Header = () => {
-  const headerRef = useRef<HTMLHeadElement>(null)
+  const headerRef = useRef<HTMLHeadElement>(null);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    const handleScroll = () => {
       if (scrollY > 80) {
-        headerRef.current?.classList.add(`${styles.scroll}`)
+        headerRef.current?.classList.add(`${styles.scroll}`);
       } else {
-        headerRef.current?.classList.remove(`${styles.scroll}`)
+        headerRef.current?.classList.remove(`${styles.scroll}`);
       }
-    })
-  }, [])
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const moveToTop = () => {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
-  }
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+
   return (
     <header className={styles.header} ref={headerRef}>
       <div className={styles.top} onClick={moveToTop}>
@@ -32,7 +37,6 @@ const Header = () => {
             <span className={styles['logo__mark']}><b>&lt;/&gt;</b></span>
             <span className={styles['logo__text']}><b>Rasel Shikdar</b></span>
           </h1>
-          <h1></h1>
         </Link>
       </div>
       <nav className={styles.nav}>
@@ -44,18 +48,13 @@ const Header = () => {
             <Link href="/now">now</Link>
           </li>
           <li>
-            <Link
-              href="https://rasel.us.kg"
-              target="__blank"
-              rel="noopener noreferrer"
-            >
-              me
-            </Link>
+            <Link href="https://rasel.us.kg" target="__blank" rel="noopener noreferrer">me</Link>
           </li>
         </ul>
       </nav>
+      <DarkMode /> {/* Include the DarkMode component */}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
